@@ -6,8 +6,8 @@ body {
 }
 #puzzle {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(5, 100px);
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(5, 80px);
   gap: 2px;
   margin: 0 auto;
   width: max-content;
