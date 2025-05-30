@@ -128,7 +128,7 @@ function checkGoal() {
     a.w === 2 &&
     a.h === 2
   ) {
-    showMessage("クリア！！");
+    showMessage("クリア");
     return true;
   }
   return false;
