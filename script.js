@@ -7,13 +7,15 @@ let blocks = [
   { id: "F0", x: 0, y: 0, w: 1, h: 2, cl: "whetstone" },
   { id: "F1", x: 3, y: 0, w: 1, h: 2, cl: "whetstone" },
   { id: "F2", x: 0, y: 2, w: 1, h: 2, cl: "flash-bomb" },
-	{ id: "F3", x: 3, y: 2, w: 1, h: 2, cl: "flash-bomb" },
-	{ id: "B", x: 1, y: 2, w: 2, h: 1, cl: "pitfall-trap" },
-	{ id: "K0", x: 1, y: 3, w: 1, h: 1, cl: "potion" },
+  { id: "F3", x: 3, y: 2, w: 1, h: 2, cl: "flash-bomb" },
+  { id: "B", x: 1, y: 2, w: 2, h: 1, cl: "pitfall-trap" },
+  { id: "K0", x: 1, y: 3, w: 1, h: 1, cl: "potion" },
   { id: "K1", x: 2, y: 3, w: 1, h: 1, cl: "potion" },
   { id: "K2", x: 0, y: 4, w: 1, h: 1, cl: "potion" },
-	{ id: "K3", x: 3, y: 4, w: 1, h: 1, cl: "potion" },
+  { id: "K3", x: 3, y: 4, w: 1, h: 1, cl: "potion" },
 ];
+
+const initialBlocks = JSON.parse(JSON.stringify(blocks));
 
 let dragging = null;
 let dragStart = { x: 0, y: 0 };
@@ -43,16 +45,16 @@ function render() {
   for (const block of blocks) {
     const div = document.createElement("div");
     div.className = "block";
-		div.textContent = ""; //block.id;
-		div.classList.add(block.cl);
+    div.textContent = ""; //block.id;
+    div.classList.add(block.cl);
     div.style.gridColumn = `${block.x + 1} / span ${block.w}`;
     div.style.gridRow = `${block.y + 1} / span ${block.h}`;
-		div.addEventListener("mousedown", (e) => {
-		  dragging = block;
-		  dragStart = { x: e.clientX, y: e.clientY };
-		});
-		div.addEventListener("touchstart", e => onTouchStart(e, block.id));
-		div.addEventListener("touchend", e => onTouchEnd(e, block.id));
+    div.addEventListener("mousedown", (e) => {
+      dragging = block;
+      dragStart = { x: e.clientX, y: e.clientY };
+    });
+    div.addEventListener("touchstart", e => onTouchStart(e, block.id));
+    div.addEventListener("touchend", e => onTouchEnd(e, block.id));
     board.appendChild(div);
   }
 }
@@ -107,7 +109,6 @@ function isFreeSpace(x, y, w, h, selfId = null) {
 
   for (const b of blocks) {
     if (b.id === selfId) continue;
-
     if (
       x < b.x + b.w &&
       x + w > b.x &&
@@ -144,5 +145,11 @@ function hideMessage() {
   const box = document.getElementById("message-box");
   box.classList.add("hidden");
 }
+
+document.getElementById("reset-btn").addEventListener("click", () => {
+  blocks = JSON.parse(JSON.stringify(initialBlocks));
+  hideMessage();
+  render();
+});
 
 render();
