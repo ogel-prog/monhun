@@ -1,6 +1,7 @@
 const board = document.getElementById("puzzle");
 const gridCols = 4;
 const gridRows = 5;
+const clearSound = new Audio("./sound/clear.mp3");
 
 let blocks = [
   { id: "M", x: 1, y: 0, w: 2, h: 2, cl: "large-barrel-bomb" },
@@ -139,6 +140,11 @@ function showMessage(text) {
   const box = document.getElementById("message-box");
   box.textContent = text;
   box.classList.remove("hidden");
+
+  clearSound.currentTime = 0;
+  clearSound.play().catch(err => {
+    console.log("音声再生エラー:", err);
+  });
 }
 
 function hideMessage() {
