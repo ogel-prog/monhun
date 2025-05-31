@@ -13,6 +13,8 @@ body {
   width: max-content;
   background: #956232;
   border: 2px solid #643200;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 .block {
   position: relative;
@@ -24,6 +26,8 @@ body {
   font-size: 20px;
   color: #000;
   cursor: pointer;
+  box-sizing: border-box;
+  user-select: none;
 }
 .block {
   position: relative;
@@ -71,4 +75,18 @@ body {
 }
 .hidden {
   display: none;
+}
+button {
+  font-size: 20px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+button:hover {
+  background: #45a049;
 }
